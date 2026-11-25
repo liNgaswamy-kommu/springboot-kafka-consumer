@@ -1,5 +1,6 @@
 package com.eidiko.spring_kafka_consumer.service;
 
+import com.eidiko.spring_kafka_consumer.entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -32,6 +33,12 @@ public class KafkaMessageConsumer {
             groupId = "kommu-consumer-group")
     public void consumer4(String message){
         log.info("Consumer4 messages {}", message);
+    }
+
+    @KafkaListener(topics = "customer-topic",
+                    groupId = "customer-consumer-group")
+    public void customerConsumer(Customer customer){
+        log.info("{} : {}", customer.getName(), customer.getEmail());
     }
 
 }
